@@ -12,10 +12,11 @@ Class {
 { #category : 'loading' }
 VanPhausten class >> loadAllSamplers [
 
-	| kawai |
+	| kawai kick |
 	allSamplers := OrderedCollection new.
 	kawai := (TpSampler new pathToFolder:
 		          '/Users/domenicocipriani/MyStuff/samples/KawaiR50-Restoration/SpectrallyEnhanced')
 		         label: 'kawai'.
-	allSamplers add: kawai
+	kick := (TpSampler new pathToFolder: '/Users/domenicocipriani/Documents/TurboSamples/kick') label: 'kick'.
+	allSamplers add: kawai; add: kick.
 ]
