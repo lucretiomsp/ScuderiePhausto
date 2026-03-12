@@ -12,7 +12,7 @@ Class {
 { #category : 'loading' }
 VanPhausten class >> loadAllSamplers [
 
-	| kawai kick tsFolder oh clap snare clave ch bleep blip ride rim bongo conga |
+	| kawai kick tsFolder oh clap snare clave ch bleep blip ride rim bongo conga loop|
 	tsFolder := self turboSamplesFolder.
 	allSamplers := OrderedCollection new.
 	kawai := (TpSampler new pathToFolder:
@@ -39,7 +39,21 @@ VanPhausten class >> loadAllSamplers [
 		         'bongo'.
 	conga := (TpSampler new pathToFolder: tsFolder , '/conga') label:
 		         'conga'.
+	loop := (TpSampler new pathToFile: '/Users/domenicocipriani/MyStuff/samples/utrechtLoops/DrumLoop_GsObject_140.wav' ) label: 'loop'.
 	allSamplers
 		add: kawai;
-		add: kick; add: ch; add: clap; add: snare; add: clave; add: ch ;  add: oh; add: bleep ; add: blip ; add: ride; add: rim ; add: bongo ; add: conga.
+		add: kick;
+		add: ch;
+		add: clap;
+		add: snare;
+		add: clave;
+		add: ch;
+		add: oh;
+		add: bleep;
+		add: blip;
+		add: ride;
+		add: rim;
+		add: bongo;
+		add: conga;
+		add: loop.
 ]
