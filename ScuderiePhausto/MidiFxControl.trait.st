@@ -33,7 +33,7 @@ MidiFxControl >> cutoffSweepTo: aMIDIValue in: aTimeInseconds [
 		                       numberOfSteps timesRepeat: [
 				                       currentValue := currentValue - step.
 				                       self masterCutoffForSweep: currentValue asInteger.
-				                       stepDelay wait ] ].
+				                       stepDelay wait ] . self masterCutoff: aMIDIValue ].
 	incrementingProcess := incrementingProcess := [
 		                                              numberOfSteps
 			                                              timesRepeat: [
@@ -43,10 +43,10 @@ MidiFxControl >> cutoffSweepTo: aMIDIValue in: aTimeInseconds [
 					                                              self masterCutoff:
 						                                              currentValue
 							                                              asInteger.
-					                                              stepDelay wait ] ].
+					                                              stepDelay wait ] . self masterCutoff: aMIDIValue].
 	startValue < aMIDIValue
 		ifTrue: [ incrementingProcess fork ]
-		ifFalse: [ decrementingProcess fork ]
+		ifFalse: [ decrementingProcess fork . ]
 ]
 
 { #category : 'sweeping' }
@@ -125,6 +125,7 @@ MidiFxControl >> masterCutoff [
 MidiFxControl >> masterCutoff: aMIDIValue [
 
 	self midiSender sendCC: 22 withValue: aMIDIValue onChannel: 15.
+	masterCutoff  := aMIDIValue 
 	
 ]
 
@@ -145,6 +146,7 @@ MidiFxControl >> masterDelayAmount [
 MidiFxControl >> masterDelayAmount: aMIDIValue [
 
 	self midiSender sendCC: 113 withValue: aMIDIValue onChannel: 16.
+	masterDelayAmount := aMIDIValue 
 	
 ]
 
@@ -159,6 +161,7 @@ MidiFxControl >> masterDelayAmountForSweep: aMIDIValue [
 MidiFxControl >> masterDelayFeedback: aMIDIValue [
 
 	self midiSender sendCC: 110 withValue: aMIDIValue onChannel: 16.
+	masterDelayFeedback := aMIDIValue 
 	
 ]
 
@@ -178,6 +181,7 @@ MidiFxControl >> masterDelayTime [
 MidiFxControl >> masterDelayTime: aMIDIValue [
 
 	self midiSender sendCC: 107 withValue: aMIDIValue onChannel: 16.
+	masterDelayTime := aMIDIValue 
 	
 ]
 
@@ -205,6 +209,8 @@ MidiFxControl >> masterFilterType: aFilterType [
 	filterType := filterTypes at: aFilterType ifAbsent: 1.
 	self midiSender sendCC: 30 withValue: filterType onChannel: 15.
 	
+	masterFilterType := filterType 
+	
 ]
 
 { #category : 'sweeping' }
@@ -230,7 +236,8 @@ MidiFxControl >> masterResonance [
 MidiFxControl >> masterResonance: aMIDIValue [
 
 	self midiSender sendCC: 23 withValue: aMIDIValue onChannel: 15.
-
+	masterResonance := aMIDIValue 
+	
 ]
 
 { #category : 'sweeping' }
