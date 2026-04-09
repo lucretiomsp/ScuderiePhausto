@@ -71,5 +71,16 @@ VanPhausten >> initialize [
 	mout := MIDISender new.
 	mout openWithDevice: 5.
 
-	self midiSender: mout
+	self midiSender: mout.
+	self initializeFxValues .
+]
+
+{ #category : 'accessing' }
+VanPhausten >> initializeFxValues [
+
+	self masterCutoff:127.
+	self masterResonance:  30.
+	self masterDelayTime: 1.
+	self masterDelayAmount: 0.
+	self masterDelayFeedback:  20
 ]

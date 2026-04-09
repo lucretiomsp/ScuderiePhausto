@@ -9,14 +9,15 @@ Trait {
 		'masterResonance',
 		'masterCutoff',
 		'masterFilterType',
-		'midiSender'
+		'midiSender',
+		'masterDelayFeedback'
 	],
 	#category : 'ScuderiePhausto-TurboPhausto',
 	#package : 'ScuderiePhausto',
 	#tag : 'TurboPhausto'
 }
 
-{ #category : 'setting' }
+{ #category : 'sweeping' }
 MidiFxControl >> cutoffSweepTo: aMIDIValue in: aTimeInseconds [
 	"  sweep the value of the selected parameter in a TimeInSeconds - the value is update every 10 milliseconds"
 
@@ -31,7 +32,7 @@ MidiFxControl >> cutoffSweepTo: aMIDIValue in: aTimeInseconds [
 	decrementingProcess := [
 		                       numberOfSteps timesRepeat: [
 				                       currentValue := currentValue - step.
-				                       self masterCutoff: currentValue asInteger.
+				                       self masterCutoffForSweep: currentValue asInteger.
 				                       stepDelay wait ] ].
 	incrementingProcess := incrementingProcess := [
 		                                              numberOfSteps
@@ -48,7 +49,7 @@ MidiFxControl >> cutoffSweepTo: aMIDIValue in: aTimeInseconds [
 		ifFalse: [ decrementingProcess fork ]
 ]
 
-{ #category : 'setting' }
+{ #category : 'sweeping' }
 MidiFxControl >> delayAmountTo: aMIDIValue in: aTimeInseconds [
 
 	| startValue currentValue range timeInDeciSec step numberOfSteps stepDelay incrementingProcess decrementingProcess |
@@ -81,7 +82,7 @@ MidiFxControl >> delayAmountTo: aMIDIValue in: aTimeInseconds [
 		ifFalse: [ decrementingProcess fork ]
 ]
 
-{ #category : 'setting' }
+{ #category : 'sweeping' }
 MidiFxControl >> delayTimeTo: aMIDIValue in: aTimeInseconds [
 
 	| startValue currentValue range timeInDeciSec step numberOfSteps stepDelay incrementingProcess decrementingProcess |
@@ -124,6 +125,14 @@ MidiFxControl >> masterCutoff [
 MidiFxControl >> masterCutoff: aMIDIValue [
 
 	self midiSender sendCC: 22 withValue: aMIDIValue onChannel: 15.
+	masterCutoff := aMIDIValue .
+]
+
+{ #category : 'sweeping' }
+MidiFxControl >> masterCutoffForSweep: aMIDIValue [
+
+	self midiSender sendCC: 22 withValue: aMIDIValue onChannel: 15.
+
 ]
 
 { #category : 'accessing' }
@@ -133,7 +142,28 @@ MidiFxControl >> masterDelayAmount [
 ]
 
 { #category : 'setting' }
+MidiFxControl >> masterDelayAmount: aMIDIValue [
+
+	self midiSender sendCC: 113 withValue: aMIDIValue onChannel: 16.
+	masterDelayAmount := aMIDIValue 
+]
+
+{ #category : 'sweeping' }
+MidiFxControl >> masterDelayAmountForSweep: aMIDIValue [
+
+	self midiSender sendCC: 113 withValue: aMIDIValue onChannel: 16.
+
+]
+
+{ #category : 'setting' }
 MidiFxControl >> masterDelayFeedback: aMIDIValue [
+
+	self midiSender sendCC: 110 withValue: aMIDIValue onChannel: 16.
+	masterDelayFeedback := aMIDIValue 
+]
+
+{ #category : 'sweeping' }
+MidiFxControl >> masterDelayFeedbackForSweep: aMIDIValue [
 
 	self midiSender sendCC: 110 withValue: aMIDIValue onChannel: 16
 ]
@@ -148,6 +178,13 @@ MidiFxControl >> masterDelayTime [
 MidiFxControl >> masterDelayTime: aMIDIValue [
 
 	self midiSender sendCC: 107 withValue: aMIDIValue onChannel: 16.
+	masterDelayTime := aMIDIValue 
+]
+
+{ #category : 'sweeping' }
+MidiFxControl >> masterDelayTimeForSweep: aMIDIValue [
+
+	self midiSender sendCC: 107 withValue: aMIDIValue onChannel: 16
 ]
 
 { #category : 'accessing' }
@@ -158,6 +195,20 @@ MidiFxControl >> masterFilterType [
 
 { #category : 'setting' }
 MidiFxControl >> masterFilterType: aFilterType [
+
+	| filterTypes filterType  |
+	filterTypes := Dictionary new.
+	filterTypes
+		add: #lp -> 1;
+		add: #bp -> 5;
+		add: #hp -> 9.
+	filterType := filterTypes at: aFilterType ifAbsent: 1.
+	self midiSender sendCC: 30 withValue: filterType onChannel: 15.
+	masterFilterType := filterType 
+]
+
+{ #category : 'sweeping' }
+MidiFxControl >> masterFilterTypeForSweep: aFilterType [
 
 	| filterTypes filterType |
 	filterTypes := Dictionary new.
@@ -179,6 +230,13 @@ MidiFxControl >> masterResonance [
 MidiFxControl >> masterResonance: aMIDIValue [
 
 	self midiSender sendCC: 23 withValue: aMIDIValue onChannel: 15.
+	masterResonance := aMIDIValue 
+]
+
+{ #category : 'sweeping' }
+MidiFxControl >> masterResonanceForSweep: aMIDIValue [
+
+	self midiSender sendCC: 23 withValue: aMIDIValue onChannel: 15
 ]
 
 { #category : 'accessing' }
