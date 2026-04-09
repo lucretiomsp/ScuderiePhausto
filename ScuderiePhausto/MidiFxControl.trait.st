@@ -65,7 +65,7 @@ MidiFxControl >> delayAmountTo: aMIDIValue in: aTimeInseconds [
 				                       currentValue := currentValue - step.
 				                       self masterDelayAmount:
 					                       currentValue asInteger.
-				                       stepDelay wait ] ].
+				                       stepDelay wait ] . self masterDelayAmount:aMIDIValue ].
 	incrementingProcess := incrementingProcess := [
 		                                              numberOfSteps
 			                                              timesRepeat: [
@@ -76,7 +76,7 @@ MidiFxControl >> delayAmountTo: aMIDIValue in: aTimeInseconds [
 						                                              masterDelayAmount:
 						                                              currentValue
 							                                              asInteger.
-					                                              stepDelay wait ] ].
+					                                              stepDelay wait ] . self masterDelayAmount:aMIDIValue ].
 	startValue < aMIDIValue
 		ifTrue: [ incrementingProcess fork ]
 		ifFalse: [ decrementingProcess fork ]
@@ -98,7 +98,7 @@ MidiFxControl >> delayTimeTo: aMIDIValue in: aTimeInseconds [
 				                       currentValue := currentValue - step.
 				                       self masterDelayTime:
 					                       currentValue asInteger.
-				                       stepDelay wait ] ].
+				                       stepDelay wait ] . self masterDelayTime:aMIDIValue].
 	incrementingProcess := incrementingProcess := [
 		                                              numberOfSteps
 			                                              timesRepeat: [
@@ -109,7 +109,7 @@ MidiFxControl >> delayTimeTo: aMIDIValue in: aTimeInseconds [
 						                                              masterDelayTime:
 						                                              currentValue
 							                                              asInteger.
-					                                              stepDelay wait ] ].
+					                                              stepDelay wait ] . self masterDelayTime:aMIDIValue].
 	startValue < aMIDIValue
 		ifTrue: [ incrementingProcess fork ]
 		ifFalse: [ decrementingProcess fork ]
