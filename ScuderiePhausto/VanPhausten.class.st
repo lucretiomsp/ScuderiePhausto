@@ -5,6 +5,8 @@ The name VanPhausten is a tribute to the legendary Marco Van Baste, ""il cigno d
 Class {
 	#name : 'VanPhausten',
 	#superclass : 'TurboPhausto',
+	#traits : 'MidiFxControl',
+	#classTraits : 'MidiFxControl classTrait',
 	#category : 'ScuderiePhausto',
 	#package : 'ScuderiePhausto'
 }
@@ -58,4 +60,16 @@ VanPhausten class >> loadAllSamplers [
 		add: bongo;
 		add: conga;
 		add: loop
+]
+
+{ #category : 'initialization' }
+VanPhausten >> initialize [
+
+	| mout |
+	super initialize.
+	PortMidi uniqueInstance terminate.
+	mout := MIDISender new.
+	mout openWithDevice: 5.
+
+	self midiSender: mout
 ]

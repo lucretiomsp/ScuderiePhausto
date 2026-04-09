@@ -8,7 +8,8 @@ Trait {
 		'masterDelayAmount',
 		'masterResonance',
 		'masterCutoff',
-		'masterFilterType'
+		'masterFilterType',
+		'midiSender'
 	],
 	#category : 'ScuderiePhausto-TurboPhausto',
 	#package : 'ScuderiePhausto',
@@ -113,6 +114,24 @@ MidiFxControl >> delayTimeTo: aMIDIValue in: aTimeInseconds [
 		ifFalse: [ decrementingProcess fork ]
 ]
 
+{ #category : 'accessing' }
+MidiFxControl >> masterCutoff [
+
+	^ masterCutoff
+]
+
+{ #category : 'setting' }
+MidiFxControl >> masterCutoff: aMIDIValue [
+
+	self midiSender sendCC: 22 withValue: aMIDIValue onChannel: 15.
+]
+
+{ #category : 'accessing' }
+MidiFxControl >> masterDelayAmount [
+
+	^ masterDelayAmount
+]
+
 { #category : 'setting' }
 MidiFxControl >> masterDelayFeedback: aMIDIValue [
 
@@ -131,6 +150,12 @@ MidiFxControl >> masterDelayTime: aMIDIValue [
 	self midiSender sendCC: 107 withValue: aMIDIValue onChannel: 16.
 ]
 
+{ #category : 'accessing' }
+MidiFxControl >> masterFilterType [
+
+	^ masterFilterType
+]
+
 { #category : 'setting' }
 MidiFxControl >> masterFilterType: aFilterType [
 
@@ -144,8 +169,28 @@ MidiFxControl >> masterFilterType: aFilterType [
 	self midiSender sendCC: 30 withValue: filterType onChannel: 15
 ]
 
+{ #category : 'accessing' }
+MidiFxControl >> masterResonance [
+
+	^ masterResonance
+]
+
 { #category : 'setting' }
 MidiFxControl >> masterResonance: aMIDIValue [
 
 	self midiSender sendCC: 23 withValue: aMIDIValue onChannel: 15.
+]
+
+{ #category : 'accessing' }
+MidiFxControl >> midiSender [ 
+ 
+^ midiSender
+]
+
+{ #category : 'accessing' }
+MidiFxControl >> midiSender: aMidiSender [
+
+midiSender := aMidiSender 
+
+	
 ]
