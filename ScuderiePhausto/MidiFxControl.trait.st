@@ -29,24 +29,24 @@ MidiFxControl >> cutoffSweepTo: aMIDIValue in: aTimeInseconds [
 	stepDelay := Delay forSeconds: 0.1.
 	numberOfSteps := timeInDeciSec.
 	currentValue := startValue.
-	decrementingProcess := [
-		                       numberOfSteps timesRepeat: [
-				                       currentValue := currentValue - step.
-				                       self masterCutoffForSweep: currentValue asInteger.
-				                       stepDelay wait ] . self masterCutoff: aMIDIValue ].
-	incrementingProcess := incrementingProcess := [
-		                                              numberOfSteps
-			                                              timesRepeat: [
-					                                              currentValue := currentValue
-					                                                              +
-					                                                              step.
-					                                              self masterCutoff:
-						                                              currentValue
-							                                              asInteger.
-					                                              stepDelay wait ] . self masterCutoff: aMIDIValue].
+	decrementingProcess := self decrementingProcessTo: aMIDIValue from: currentValue step: step numberOfStep: numberOfSteps interval: stepDelay.
+	incrementingProcess := self incrementingProcessTo: aMIDIValue from: currentValue step: step numberOfStep: numberOfSteps interval: stepDelay.
 	startValue < aMIDIValue
 		ifTrue: [ incrementingProcess fork ]
-		ifFalse: [ decrementingProcess fork . ]
+		ifFalse: [ decrementingProcess fork ]
+]
+
+{ #category : 'sweeping' }
+MidiFxControl >> decrementingProcessTo: aMidiValue from: aValue step: aStepValue numberOfStep: aNumberOfSteps interval: aStepDelay [
+
+	| currentValue |
+	currentValue := aValue.
+	^ [
+		  aNumberOfSteps timesRepeat: [
+				  currentValue := currentValue - aStepValue.
+				  self masterCutoffForSweep: currentValue asInteger.
+				  aStepDelay wait ].
+		  self masterCutoff: aMidiValue ]
 ]
 
 { #category : 'sweeping' }
@@ -113,6 +113,19 @@ MidiFxControl >> delayTimeTo: aMIDIValue in: aTimeInseconds [
 	startValue < aMIDIValue
 		ifTrue: [ incrementingProcess fork ]
 		ifFalse: [ decrementingProcess fork ]
+]
+
+{ #category : 'sweeping' }
+MidiFxControl >> incrementingProcessTo: aMidiValue from: aValue step: aStepValue numberOfStep: aNumberOfSteps interval: aStepDelay [
+
+	| currentValue |
+	currentValue := aValue.
+	^ [
+		  aNumberOfSteps timesRepeat: [
+				  currentValue := currentValue +aStepValue.
+				  self masterCutoffForSweep: currentValue asInteger.
+				  aStepDelay wait ].
+		  self masterCutoff: aMidiValue ]
 ]
 
 { #category : 'accessing' }
