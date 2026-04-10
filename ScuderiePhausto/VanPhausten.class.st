@@ -72,16 +72,17 @@ VanPhausten >> initialize [
 	mout openWithDevice: 5.
 
 	self midiSender: mout.
-	self initializeFxValues .
+	self initializeFxValues.
+	self bpm: 140.
 ]
 
 { #category : 'initialization' }
 VanPhausten >> initializeFxValues [
 
 	self masterCutoff: 0.
-	self masterFilterType: 3. 
-	self masterResonance:  30.
+	self masterFilterType: 9.
+	self masterResonance: 30.
 	self masterDelayTime: 1.
 	self masterDelayAmount: 0.
-	self masterDelayFeedback:  20
+	self masterDelayFeedback: 20
 ]

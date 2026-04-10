@@ -19,10 +19,22 @@ Class {
 }
 
 { #category : 'accessing' }
+ScuMidiValueChanger >> ccNumber [
+
+	^ ccNumber
+]
+
+{ #category : 'accessing' }
 ScuMidiValueChanger >> ccNumber: aMidiCC [
 
 
 ccNumber := aMidiCC 
+]
+
+{ #category : 'accessing' }
+ScuMidiValueChanger >> destinationValue [
+
+	^ destinationValue
 ]
 
 { #category : 'accessing' }
@@ -32,9 +44,21 @@ destinationValue := aMidiValue
 ]
 
 { #category : 'accessing' }
+ScuMidiValueChanger >> interval [
+
+	^ interval
+]
+
+{ #category : 'accessing' }
 ScuMidiValueChanger >> interval: aStepDelay [
 
 interval := aStepDelay 
+]
+
+{ #category : 'accessing' }
+ScuMidiValueChanger >> midiChannel [
+
+	^ midiChannel
 ]
 
 { #category : 'accessing' }
@@ -45,10 +69,22 @@ midiChannel := aMidichannel
 ]
 
 { #category : 'accessing' }
+ScuMidiValueChanger >> midiSender [
+
+	^ midiSender
+]
+
+{ #category : 'accessing' }
 ScuMidiValueChanger >> midiSender: aMidiSender [
 
 
 midiSender := aMidiSender 
+]
+
+{ #category : 'accessing' }
+ScuMidiValueChanger >> numberOfSteps [
+
+	^ numberOfSteps
 ]
 
 { #category : 'accessing' }
@@ -58,9 +94,21 @@ numberOfSteps := aNumberOfSteps
 ]
 
 { #category : 'accessing' }
+ScuMidiValueChanger >> startValue [
+
+	^ startValue
+]
+
+{ #category : 'accessing' }
 ScuMidiValueChanger >> startValue: aMidiValue [ 
 
 startValue := aMidiValue 
+]
+
+{ #category : 'accessing' }
+ScuMidiValueChanger >> stepValue [
+
+	^ stepValue
 ]
 
 { #category : 'accessing' }

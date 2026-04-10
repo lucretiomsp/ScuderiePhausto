@@ -18,22 +18,18 @@ Trait {
 }
 
 { #category : 'sweeping' }
-MidiFxControl >> cutoffSweepTo: aMIDIValue in: aTimeInseconds [
+MidiFxControl >> cutoffSweepTo: aMIDIValue in: aTimeInSeconds [
 	"  sweep the value of the selected parameter in a TimeInSeconds - the value is update every 10 milliseconds"
+   | startValue |
 
-	| startValue currentValue range timeInDeciSec step numberOfSteps stepDelay incrementingProcess decrementingProcess |
-	startValue := self masterCutoff.
-	range := (startValue max: aMIDIValue) - (startValue min: aMIDIValue).
-	timeInDeciSec := aTimeInseconds * 10.
-	step := range / timeInDeciSec.
-	stepDelay := Delay forSeconds: 0.1.
-	numberOfSteps := timeInDeciSec.
-	currentValue := startValue.
-	decrementingProcess := self decrementingProcessTo: aMIDIValue from: currentValue step: step numberOfStep: numberOfSteps interval: stepDelay.
-	incrementingProcess := self incrementingProcessTo: aMIDIValue from: currentValue step: step numberOfStep: numberOfSteps interval: stepDelay.
-	startValue < aMIDIValue
-		ifTrue: [ incrementingProcess fork ]
-		ifFalse: [ decrementingProcess fork ]
+    startValue := self masterCutoff.
+
+    self
+        sweepFrom: startValue
+        to: aMIDIValue
+        in: aTimeInSeconds 
+        during: [ :v | self masterCutoffForSweep: v ]
+        final:  [ :v | self masterCutoff: v ].
 ]
 
 { #category : 'sweeping' }
@@ -271,4 +267,28 @@ MidiFxControl >> midiSender: aMidiSender [
 midiSender := aMidiSender 
 
 	
+]
+
+{ #category : 'sweeping' }
+MidiFxControl >> sweepFrom: startValue to: targetValue in: aTimeInSeconds during: stepBlock final: finalBlock [
+
+"generic method template for parameter sweeping"
+	| numberOfSteps step stepDelay totalDuration currentValue |
+	numberOfSteps := (aTimeInSeconds * 10) asInteger max: 1.
+	stepDelay := Delay forMilliseconds: 100.
+
+	step := targetValue - startValue / numberOfSteps.
+	currentValue := startValue.
+
+	[
+		numberOfSteps timesRepeat: [
+				currentValue := currentValue + step.
+				stepBlock value: currentValue asInteger.
+				stepDelay wait ] ] fork.
+
+	totalDuration := Delay forMilliseconds: (100 * (numberOfSteps + 1)).
+
+	[
+		totalDuration wait.
+		finalBlock value: targetValue ] fork
 ]
