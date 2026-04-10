@@ -61,6 +61,29 @@ MidiFxControl >> delayTimeTo: aMIDIValue in: aTimeInSeconds [
 		final: [ :v | self masterDelayTime v ]
 ]
 
+{ #category : 'setting' }
+MidiFxControl >> lfo1Depth: aMIDIValue [
+
+|normValue|
+normValue :=( 64 - aMIDIValue ) abs.
+	self midiSender sendCC: 73 withValue: aMIDIValue onChannel: 15.
+	masterCutoff := aMIDIValue
+]
+
+{ #category : 'setting' }
+MidiFxControl >> lfo1Multiplier: aMIDIValue [
+
+	self midiSender sendCC: 68 withValue: aMIDIValue onChannel: 15.
+	masterCutoff := aMIDIValue
+]
+
+{ #category : 'setting' }
+MidiFxControl >> lfo1Speed: aMIDIValue [
+
+	self midiSender sendCC: 67 withValue: aMIDIValue onChannel: 15.
+	masterCutoff := aMIDIValue
+]
+
 { #category : 'accessing' }
 MidiFxControl >> masterCutoff [
 
