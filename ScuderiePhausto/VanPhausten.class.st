@@ -84,7 +84,7 @@ VanPhausten >> initialize [
 { #category : 'initialization' }
 VanPhausten >> initializeFxValues [
 
-	self masterCutoff: 0.
+	self masterCutoff: 127.
 	self masterFilterType: 9.
 	self masterResonance: 30.
 	self masterDelayTime: 1.
