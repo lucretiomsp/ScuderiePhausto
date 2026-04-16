@@ -28,7 +28,7 @@ VanPhausten class >> loadAllSamplers [
 		         'snare'.
 	clave := (TpSampler new pathToFolder: tsFolder , '/clave') label:
 		         'clave'.
-	ch := (TpSampler new pathToFolder: tsFolder , '/ch') label: 'ch'.
+	ch := ((TpSampler new pathToFolder: tsFolder , '/ch') label: 'ch'; uLevel: 0.25).
 	oh := (TpSampler new pathToFolder: tsFolder , '/oh')
 		      label: 'oh';
 		      uLevel: 0.35.
@@ -43,8 +43,9 @@ VanPhausten class >> loadAllSamplers [
 		         'bongo'.
 	conga := (TpSampler new pathToFolder: tsFolder , '/conga') label:
 		         'conga'.
-	pad := (TpSampler new pathToFolder: '/Users/domenicocipriani/MyStuff/samples/utrechtPads') label:
-		         'pad'.
+	pad := (TpSampler new pathToFolder:
+		        '/Users/domenicocipriani/MyStuff/samples/utrechtPads')
+		       label: 'pad'.
 	loop := (TpSampler new pathToFile:
 		         '/Users/domenicocipriani/MyStuff/samples/utrechtLoops/DrumLoop_GsObject_140.wav')
 		        label: 'loop'.
@@ -64,7 +65,7 @@ VanPhausten class >> loadAllSamplers [
 		add: bongo;
 		add: conga;
 		add: loop;
-		add: pad.
+		add: pad
 ]
 
 { #category : 'initialization' }
