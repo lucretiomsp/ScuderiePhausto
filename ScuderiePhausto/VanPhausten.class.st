@@ -16,15 +16,15 @@ VanPhausten class >> loadAllSamplers [
 
 	| pad loop |
 	super loadAllSamplers.
-	allSamplers := allSamplers asOrderedCollection .
+	allSamplers := allSamplers asOrderedCollection.
 	pad := (TpSampler new pathToFolder:
 		        '/Users/domenicocipriani/MyStuff/samples/utrechtPads')
 		       label: 'pad'.
-	loop := (TpSampler new pathToFile:
-		         '/Users/domenicocipriani/MyStuff/samples/utrechtLoops/DrumLoop_GsObject_140.wav')
+	loop := (TpSampler new pathToFolder:
+		         '/Users/domenicocipriani/MyStuff/samples/utrechtLoops')
 		        label: 'loop'.
 	allSamplers add: pad.
-	allSamplers add: loop.
+	allSamplers add: loop
 	"| kawai kick tsFolder oh clap snare clave ch bleep blip ride rim bongo conga loop pad |
 	tsFolder := self turboSamplesFolder.
 	allSamplers := OrderedCollection new.
