@@ -114,8 +114,8 @@ VanPhausten >> initializeFxValues [
 { #category : 'initialization' }
 VanPhausten >> initializeLevels [
 
-	self tpDsp setValue: 0.4 parameter: 'ohUlevel'.
-	self tpDsp setValue: 0.6 parameter: 'chUlevel'
+	self tpDsp setValue: 0.4 parameter: 'ohULevel'.
+	self tpDsp setValue: 0.6 parameter: 'chULevel'
 ]
 
 { #category : 'as yet unclassified' }
