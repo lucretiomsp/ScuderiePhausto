@@ -21,14 +21,18 @@ VanPhausten class >> loadAllSamplers [
 		        '/Users/domenicocipriani/MyStuff/samples/utrechtPads')
 		       label: 'pad'.
 	loop := (TpSampler new pathToFolder:
-		         '/Users/domenicocipriani/MyStuff/samples/utrechtLoops') label: #loop.
-	vocals := (TpSampler new pathToFolder: '/Users/domenicocipriani/MyStuff/samples/shanghai24')
-		        label: 'vox'.
-	cornholio := ( TpSampler new pathToFile: '/Users/domenicocipriani/MyStuff/samples/Holy_CornholioDELAY.aiff') label: #cornholio. 
+		         '/Users/domenicocipriani/MyStuff/samples/utrechtLoops')
+		        label: #loop.
+	vocals := (TpSampler new pathToFolder:
+		           '/Users/domenicocipriani/MyStuff/samples/shanghai24/vocals')
+		          label: 'vox'.
+	cornholio := (TpSampler new pathToFile:
+		              '/Users/domenicocipriani/MyStuff/samples/Holy_CornholioDELAY.aiff')
+		             label: #cornholio.
 	allSamplers add: pad.
 	allSamplers add: loop.
 	allSamplers add: vocals.
-	allSamplers add: cornholio.
+	allSamplers add: cornholio
 	"| kawai kick tsFolder oh clap snare clave ch bleep blip ride rim bongo conga loop pad |
 	tsFolder := self turboSamplesFolder.
 	allSamplers := OrderedCollection new.
