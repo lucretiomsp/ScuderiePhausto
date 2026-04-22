@@ -14,17 +14,19 @@ Class {
 { #category : 'loading' }
 VanPhausten class >> loadAllSamplers [
 
-	| pad loop |
+	| pad loop vocals |
 	super loadAllSamplers.
 	allSamplers := allSamplers asOrderedCollection.
 	pad := (TpSampler new pathToFolder:
 		        '/Users/domenicocipriani/MyStuff/samples/utrechtPads')
 		       label: 'pad'.
 	loop := (TpSampler new pathToFolder:
-		         '/Users/domenicocipriani/MyStuff/samples/utrechtLoops')
+		         '/Users/domenicocipriani/MyStuff/samples/utrechtLoops').
+	vocals := (TpSampler new pathToFolder: '/Users/domenicocipriani/MyStuff/samples/shanghai24')
 		        label: 'loop'.
 	allSamplers add: pad.
-	allSamplers add: loop
+	allSamplers add: loop.
+	allSamplers add: vocals
 	"| kawai kick tsFolder oh clap snare clave ch bleep blip ride rim bongo conga loop pad |
 	tsFolder := self turboSamplesFolder.
 	allSamplers := OrderedCollection new.
@@ -86,13 +88,14 @@ VanPhausten >> initialize [
 
 	| mout |
 	super initialize.
+	self initializeLevels.
 	PortMidi uniqueInstance terminate.
 	mout := MIDISender new.
 	mout openWithDevice: 5.
 
 	self midiSender: mout.
 	self initializeFxValues.
-	self bpm: 140.
+	self bpm: 140
 ]
 
 { #category : 'initialization' }
@@ -104,4 +107,11 @@ VanPhausten >> initializeFxValues [
 	self masterDelayTime: 1.
 	self masterDelayAmount: 0.
 	self masterDelayFeedback: 20
+]
+
+{ #category : 'initialization' }
+VanPhausten >> initializeLevels [
+
+	self tpDsp setValue: 0.4 parameter: 'ohUlevel'.
+	self tpDsp setValue: 0.6 parameter: 'chUlevel'
 ]
