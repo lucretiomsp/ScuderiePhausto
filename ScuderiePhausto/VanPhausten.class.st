@@ -14,19 +14,21 @@ Class {
 { #category : 'loading' }
 VanPhausten class >> loadAllSamplers [
 
-	| pad loop vocals |
+	| pad loop vocals cornholio |
 	super loadAllSamplers.
 	allSamplers := allSamplers asOrderedCollection.
 	pad := (TpSampler new pathToFolder:
 		        '/Users/domenicocipriani/MyStuff/samples/utrechtPads')
 		       label: 'pad'.
 	loop := (TpSampler new pathToFolder:
-		         '/Users/domenicocipriani/MyStuff/samples/utrechtLoops').
+		         '/Users/domenicocipriani/MyStuff/samples/utrechtLoops') label: #loop.
 	vocals := (TpSampler new pathToFolder: '/Users/domenicocipriani/MyStuff/samples/shanghai24')
-		        label: 'loop'.
+		        label: 'vox'.
+	cornholio := ( TpSampler new pathToFile: '/Users/domenicocipriani/MyStuff/samples/Holy_CornholioDELAY.aiff') label: #cornholio. 
 	allSamplers add: pad.
 	allSamplers add: loop.
-	allSamplers add: vocals
+	allSamplers add: vocals.
+	allSamplers add: cornholio.
 	"| kawai kick tsFolder oh clap snare clave ch bleep blip ride rim bongo conga loop pad |
 	tsFolder := self turboSamplesFolder.
 	allSamplers := OrderedCollection new.
@@ -114,4 +116,12 @@ VanPhausten >> initializeLevels [
 
 	self tpDsp setValue: 0.4 parameter: 'ohUlevel'.
 	self tpDsp setValue: 0.6 parameter: 'chUlevel'
+]
+
+{ #category : 'as yet unclassified' }
+VanPhausten >> speaksCornholio [
+
+self  tpDsp setValue: 300 parameter: 'cornholioFreq'.
+self tpDsp trig: 'cornholioTrigger'.
+
 ]
