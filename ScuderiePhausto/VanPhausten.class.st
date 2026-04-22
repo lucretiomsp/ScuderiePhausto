@@ -14,7 +14,18 @@ Class {
 { #category : 'loading' }
 VanPhausten class >> loadAllSamplers [
 
-	| kawai kick tsFolder oh clap snare clave ch bleep blip ride rim bongo conga loop pad |
+	| pad loop |
+	super loadAllSamplers.
+	allSamplers := allSamplers asOrderedCollection .
+	pad := (TpSampler new pathToFolder:
+		        '/Users/domenicocipriani/MyStuff/samples/utrechtPads')
+		       label: 'pad'.
+	loop := (TpSampler new pathToFile:
+		         '/Users/domenicocipriani/MyStuff/samples/utrechtLoops/DrumLoop_GsObject_140.wav')
+		        label: 'loop'.
+	allSamplers add: pad.
+	allSamplers add: loop.
+	"| kawai kick tsFolder oh clap snare clave ch bleep blip ride rim bongo conga loop pad |
 	tsFolder := self turboSamplesFolder.
 	allSamplers := OrderedCollection new.
 	kawai := (TpSampler new pathToFolder:
@@ -28,7 +39,9 @@ VanPhausten class >> loadAllSamplers [
 		         'snare'.
 	clave := (TpSampler new pathToFolder: tsFolder , '/clave') label:
 		         'clave'.
-	ch := ((TpSampler new pathToFolder: tsFolder , '/ch') label: 'ch'; uLevel: 0.25).
+	ch := (TpSampler new pathToFolder: tsFolder , '/ch')
+		      label: 'ch';
+		      uLevel: 0.25.
 	oh := (TpSampler new pathToFolder: tsFolder , '/oh')
 		      label: 'oh';
 		      uLevel: 0.35.
@@ -65,7 +78,7 @@ VanPhausten class >> loadAllSamplers [
 		add: bongo;
 		add: conga;
 		add: loop;
-		add: pad
+		add: pad"
 ]
 
 { #category : 'initialization' }
@@ -85,8 +98,8 @@ VanPhausten >> initialize [
 { #category : 'initialization' }
 VanPhausten >> initializeFxValues [
 
-	self masterCutoff: 127.
-	self masterFilterType: 9.
+	self masterCutoff: 0.
+	self masterFilterType: #hp.
 	self masterResonance: 30.
 	self masterDelayTime: 1.
 	self masterDelayAmount: 0.
