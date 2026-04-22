@@ -122,7 +122,7 @@ VanPhausten >> initializeLevels [
 	self tpDsp setValue: 0.6 parameter: 'chULevel'
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'playing' }
 VanPhausten >> speaksCornholio [
 
 self  tpDsp setValue: 300 parameter: 'cornholioFreq'.
