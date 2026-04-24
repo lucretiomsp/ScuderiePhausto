@@ -118,8 +118,9 @@ VanPhausten >> initializeFxValues [
 { #category : 'initialization' }
 VanPhausten >> initializeLevels [
 
+	self tpDsp setValue: 0.9 parameter: 'kickULevel'.
 	self tpDsp setValue: 0.4 parameter: 'ohULevel'.
-	self tpDsp setValue: 0.6 parameter: 'chULevel'
+	self tpDsp setValue: 0.6 parameter: 'chULevel'.
 ]
 
 { #category : 'playing' }
