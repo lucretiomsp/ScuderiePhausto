@@ -129,8 +129,10 @@ MidiFxControl >> masterDelayAmountForSweep: aMIDIValue [
 { #category : 'setting' }
 MidiFxControl >> masterDelayFeedback: aMIDIValue [
 
-	self midiSender sendCC: 110 withValue: aMIDIValue onChannel: 16.
-	masterDelayFeedback := aMIDIValue 
+|  clippedValue |
+clippedValue := aMIDIValue min: 127.
+	self midiSender sendCC: 110 withValue: clippedValue onChannel: 16.
+	masterDelayFeedback := clippedValue 
 	
 ]
 
