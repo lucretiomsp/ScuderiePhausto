@@ -27,8 +27,8 @@ VanPhausten class >> loadAllSamplers [
 		           '/Users/domenicocipriani/MyStuff/samples/shanghai24/vocals')
 		          label: 'vox'.
 	cornholio := (TpSampler new pathToFile:
-		              '/Users/domenicocipriani/MyStuff/samples/Holy_CornholioDELAY.aiff')
-		             label: #cornholio.
+		              '/Users/domenicocipriani/MyStuff/samples/voices/jurassicDogson.aiff')
+		             label: #cornholio; pitch: 261.625; uLevel: 0.75 .
 	allSamplers add: pad.
 	allSamplers add: loop.
 	allSamplers add: vocals.
@@ -126,7 +126,15 @@ VanPhausten >> initializeLevels [
 { #category : 'playing' }
 VanPhausten >> speaksCornholio [
 
-self  tpDsp setValue: 300 parameter: 'cornholioFreq'.
+self  tpDsp setValue: 261.625  parameter: 'cornholioFreq'.
+self tpDsp trig: 'cornholioTrigger'.
+
+]
+
+{ #category : 'playing' }
+VanPhausten >> speaksJurassic [
+
+self  tpDsp setValue: 261.625  parameter: 'cornholioFreq'.
 self tpDsp trig: 'cornholioTrigger'.
 
 ]
