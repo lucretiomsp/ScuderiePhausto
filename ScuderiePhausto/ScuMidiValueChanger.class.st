@@ -14,8 +14,9 @@ Class {
 		'midiSender',
 		'midiChannel'
 	],
-	#category : 'ScuderiePhausto',
-	#package : 'ScuderiePhausto'
+	#category : 'ScuderiePhausto-TurboPhausto',
+	#package : 'ScuderiePhausto',
+	#tag : 'TurboPhausto'
 }
 
 { #category : 'accessing' }

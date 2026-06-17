@@ -7,8 +7,9 @@ Class {
 	#superclass : 'TurboPhausto',
 	#traits : 'MidiFxControl',
 	#classTraits : 'MidiFxControl classTrait',
-	#category : 'ScuderiePhausto',
-	#package : 'ScuderiePhausto'
+	#category : 'ScuderiePhausto-TurboPhausto',
+	#package : 'ScuderiePhausto',
+	#tag : 'TurboPhausto'
 }
 
 { #category : 'loading' }
@@ -119,8 +120,11 @@ VanPhausten >> initializeFxValues [
 VanPhausten >> initializeLevels [
 
 	self tpDsp setValue: 0.9 parameter: 'kickULevel'.
-	self tpDsp setValue: 0.4 parameter: 'ohULevel'.
+	self tpDsp setValue: 0.35 parameter: 'ohULevel'.
 	self tpDsp setValue: 0.6 parameter: 'chULevel'.
+	self tpDsp setValue: 0.36 parameter: 'congaULevel'.
+	self tpDsp setValue: 0.38 parameter: 'bongoULevel'.
+	
 ]
 
 { #category : 'playing' }
