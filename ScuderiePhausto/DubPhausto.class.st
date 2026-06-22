@@ -23,22 +23,22 @@ DubPhausto class >> loadAllSamplers [
 			               duration: #sirenTime;
 			               feedBack: #sirenFb).
 	skank := ((TpSampler new pathToFolder:
-		          samplesFolder , 'algorest/skank') label: #skank) => dwSkankMix.
+		           samplesFolder , 'algorest/skank') label: #skank)
+	         => dwSkankMix.
 	dwSirenMix := DryWetMonoMixer new fx: (PhEcho new
 			               duration: #sirenTime;
 			               feedBack: #sirenFb).
 	siren := ((TpSampler new pathToFolder:
 		           samplesFolder , 'algorest/sirens') label: #siren)
 	         => dwSirenMix.
-	vox := (TpSampler new pathToFolder:
-		        samplesFolder , 'algorest/vox')
-		       label: 'pad'.
+	vox := (TpSampler new pathToFolder: samplesFolder , 'algorest/vox')
+		       label: 'vox'.
 
 
 	allSamplers add: pad.
 	allSamplers add: skank.
 	allSamplers add: siren.
-	allSamplers add: vox.
+	allSamplers add: vox
 ]
 
 { #category : 'initialization' }
@@ -47,6 +47,7 @@ DubPhausto >> initialize [
 	super initialize.
 	self bpm: 122.
 	self initializeIndexes.
+	self setValue: 0.01 parameter: #reverb. 
 ]
 
 { #category : 'initialization' }
@@ -54,4 +55,18 @@ DubPhausto >> initializeIndexes [
 
 	self tpDsp setValue: 6 parameter: 'clapIndex'.
 	self tpDsp setValue: 9 parameter: 'chIndex'
+]
+
+{ #category : 'as yet unclassified' }
+DubPhausto >> noGood [
+
+ self setValue: 0 parameter: 'voxIndex'.
+	self trig: #voxTrigger
+]
+
+{ #category : 'as yet unclassified' }
+DubPhausto >> outro [
+
+	self setValue: 4 parameter: 'voxIndex'.
+	self trig: #voxTrigger
 ]
