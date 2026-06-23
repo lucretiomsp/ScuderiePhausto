@@ -20,8 +20,8 @@ DubPhausto class >> loadAllSamplers [
 		        '/Users/domenicocipriani/MyStuff/samples/utrechtPads')
 		       label: 'pad'.
 	dwSkankMix := DryWetMonoMixer new fx: (PhEcho new
-			               duration: #sirenTime;
-			               feedBack: #sirenFb).
+			               duration: #skankTime;
+			               feedBack: #skankFb).
 	skank := ((TpSampler new pathToFolder:
 		           samplesFolder , 'algorest/skank') label: #skank)
 	         => dwSkankMix.
@@ -47,7 +47,7 @@ DubPhausto >> initialize [
 	super initialize.
 	self bpm: 122.
 	self initializeIndexes.
-	self setValue: 0.01 parameter: #reverb. 
+	self tpDsp setValue: 0.01 parameter: #reverb
 ]
 
 { #category : 'initialization' }
@@ -57,14 +57,14 @@ DubPhausto >> initializeIndexes [
 	self tpDsp setValue: 9 parameter: 'chIndex'
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'triggering' }
 DubPhausto >> noGood [
 
  self setValue: 0 parameter: 'voxIndex'.
 	self trig: #voxTrigger
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'triggering' }
 DubPhausto >> outro [
 
 	self setValue: 4 parameter: 'voxIndex'.
